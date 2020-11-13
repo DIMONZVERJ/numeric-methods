@@ -2,16 +2,13 @@ from scipy.misc import derivative
 import time
 import pandas as pd
 
+from common_functions import *
+
 pd.set_option('display.precision', 16)
 pd.set_option('expand_frame_repr', False)
 EPS = 10 ** (-5)
 A = 0
 B = 1
-
-
-def parse_function(file_name):
-    with open(file_name, 'r') as file:
-        return eval(f'lambda x: {file.readline()}')
 
 
 def write_log(function_name: str, res_df: pd.DataFrame):
