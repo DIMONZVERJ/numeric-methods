@@ -1,35 +1,7 @@
 import matplotlib.pyplot as plt
+from common_functions import thomas_algorithm
 
 file_log = open('result.txt', 'w')
-
-
-def thomas_algorithm(a_val: list, b_val: list, c_val: list, d_val: list):
-    """Метод прогонки"""
-    p_val = []
-    q_val = []
-
-    # init p_1 and q_1
-    p_val.append(-c_val[0] / b_val[0])
-    q_val.append(d_val[0] / b_val[0])
-
-    x_val = []
-    for i in range(1, len(a_val)):
-        # find p_i and q_i for i from 2 to n - 1.
-        # NOTE: for q_i we find also q_n to further find x_n
-        if i < len(a_val) - 1:
-            p_val.append(-c_val[i] / (a_val[i] * p_val[i - 1] + b_val[i]))
-        q_val.append((d_val[i] - a_val[i] * q_val[i - 1]) / (a_val[i] * p_val[i - 1] + b_val[i]))
-
-    # find x_n
-    x_val.append(q_val.pop())
-    # execute a reverse step to find x_(n-1)..x_1
-    for i in range(len(a_val) - 1, 1, -1):
-        x_val.append(p_val.pop() * x_val[-1] + q_val.pop())
-    # find x_0
-    x_val.append(1 / b_val[0] * (-c_val[0] * x_val[1] + d_val[0]))
-    # reverse list to normal order: x_0, x_1..x_n
-    x_val.reverse()
-    return x_val
 
 
 def h_value(x_next, x_now):
